@@ -8,11 +8,11 @@ uniform float u_time;
 
 // Plot a line on Y using a value between 0.0-1.0
 float plot(vec2 st) {    
-    return smoothstep(0.02, 0.0, abs(st.y - st.x));
+    return smoothstep(0.005, 0.00, abs(st.x - st.y));
 }
 
 void main() {
-	vec2 st = gl_FragCoord.xy/u_resolution;
+	vec2 st = gl_FragCoord.xy / u_resolution;
 
     float y = st.x;
 
