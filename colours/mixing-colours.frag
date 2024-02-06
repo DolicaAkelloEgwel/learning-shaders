@@ -239,7 +239,8 @@ float easeInOutBounce(float t) {
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeOutBounce(sin(u_time)) * 0.5;
+	float t = u_time * 0.5;
+	float pct = easeInOutBounce(abs(fract(t) * 2.0 - 1.0));
 
 	color = mix(colorA, colorB, pct);
 
