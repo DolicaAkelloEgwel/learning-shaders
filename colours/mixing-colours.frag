@@ -41,11 +41,11 @@ float easeInOutCubic(float t) {
 	}
 }
 
-float eastInQuint(float t) {
+float easeInQuint(float t) {
 	return pow(t, 5.0);
 }
 
-float eastOutQuint(float t) {
+float easeOutQuint(float t) {
 	return 1.0 - pow(1.0 - t, 5.0);
 }
 
@@ -75,10 +75,46 @@ float easeInOutCirc(float t) {
 	}
 }
 
+float easeInElastic(float t) {
+	float c4 = (2.0 * PI) / 3.0;
+
+	if (t == 0.0 || t == 1.0) {
+		return t;
+	}
+	else {
+		return - pow(2.0, 10.0 * t - 10.0) * sin((t * 10.0 - 10.75) * c4);
+	}
+}
+
+float easeOutElastic(float t) {
+	float c4 = (2.0 * PI) / 3.0;
+
+	if (t == 0.0 || t == 1.0) {
+		return t;
+	}
+	else {
+		return pow(2.0, -10.0 * t - 10.0) * sin((t * 10.0 - 0.75) * c4) + 1.0;
+	}
+}
+
+float easeInOutElastic(float t) {
+	float c5 = (2.0 * PI) / 4.5;
+
+	if (t == 0.0 || t == 1.0) {
+		return t;
+	}
+	else if (t < 0.5) {
+		return -(pow(2.0, 20.0 * t - 10.0) * sin((20.0 * t - 11.125) * c5));
+	}
+	else {
+		return pow(2.0, -20.0 * t + 10.0) * sin((20.0 * t - 11.125) * c5);
+	}
+}
+
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInOutCirc(easeInSine(u_time));
+	float pct = easeInOutElastic(easeInSine(u_time) * 0.5);
 
 	color = mix(colorA, colorB, pct);
 
