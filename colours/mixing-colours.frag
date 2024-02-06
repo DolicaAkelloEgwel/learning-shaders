@@ -1,3 +1,5 @@
+// Implementations of functins from easings.net
+
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -201,10 +203,43 @@ float easeInOutBack(float t) {
 	}
 }
 
+float easeOutBounce(float t) {
+
+	float n1 = 7.5625;
+	float d1 = 2.75;
+
+	if (t < 1 / d1) {
+	    return n1 * t * t;
+	}
+	else if (t < 2 / d1) {
+	    return n1 * (t -= 1.5 / d1) * t + 0.75;
+	}
+	else if (t < 2.5 / d1) {
+	    return n1 * (t -= 2.25 / d1) * t + 0.9375;
+	}
+	else {
+	    return n1 * (t -= 2.625 / d1) * t + 0.984375;
+	}
+}
+
+float easeInBounce(float t) {
+	return 1.0 - easeOutBounce(1.0 - t);
+}
+
+float easeInOutBounce(float t) {
+
+	if (t < 0.5) {
+		return (1.0 - easeOutBounce(1.0 - 2.0 * t)) * 0.5;
+	}
+	else {
+		return (1.0 + easeOutBounce(2.0 * t - 1.0)) * 0.5;
+	}
+}
+
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeOutBack(u_time) * 0.5;
+	float pct = easeOutBounce(sin(u_time)) * 0.5;
 
 	color = mix(colorA, colorB, pct);
 
