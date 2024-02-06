@@ -41,10 +41,27 @@ float easeInOutCubic(float t) {
 	}
 }
 
+float eastInQuint(float t) {
+	return pow(t, 5.0);
+}
+
+float eastOutQuint(float t) {
+	return 1.0 - pow(1.0 - t, 5.0);
+}
+
+float easeInOutQuint(float t) {
+	if (t < 0.5) {
+		return 16.0 * pow(t, 5.0);
+	}
+	else {
+		return 1.0 - pow(-2.0 * t + 2.0, 5.0);
+	}
+}
+
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInOutCubic(u_time);
+	float pct = easeInOutSine(u_time);
 
 	color = mix(colorA, colorB, pct);
 
