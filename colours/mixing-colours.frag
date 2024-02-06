@@ -128,10 +128,27 @@ float easeInOutQuad(float t) {
 	}
 }
 
+float easeInQuart(float t) {
+	return pow(t, 4.0);
+}
+
+float eastOutQuart(float t) {
+	return 1.0 - pow(1.0 - t, 4.0);
+}
+
+float easeInOutQuart(float t) {
+	if (t < 0.5) {
+		return 8.0 * pow(t, 4.0);
+	}
+	else {
+		return pow(-2.0 * t + 2.0, 4.0) * 0.5;
+	}
+}
+
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInOutQuad(u_time) * 0.5;
+	float pct = easeInOutSine(u_time) * 0.5;
 
 	color = mix(colorA, colorB, pct);
 
