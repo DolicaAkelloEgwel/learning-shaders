@@ -145,10 +145,40 @@ float easeInOutQuart(float t) {
 	}
 }
 
+float easeInExpo(float t) {
+	if (t == 0.0) {
+		return 0.0;
+	}
+	else {
+		return pow(2.0, 10.0 * t - 10.0);
+	}
+}
+
+float easeOutExpo(float t) {
+	if (t == 1.0) {
+		return 1.0;
+	}
+	else {
+		return 1.0 - pow(2.0, -10.0 * t);
+	}
+}
+
+float easeInOutExpo(float t) {
+	if (t == 0.0 || t == 1.0) {
+		return t;
+	}
+	else if (t < 0.5) {
+		return pow(2.0, 20.0 * t - 10.0);
+	}
+	else {
+		(2.0 - pow(2.0, -20.0 * t + 10.0)) * 0.5;
+	}
+}
+
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInOutSine(u_time) * 0.5;
+	float pct = easeInOutExpo(u_time) * 0.5;
 
 	color = mix(colorA, colorB, pct);
 
