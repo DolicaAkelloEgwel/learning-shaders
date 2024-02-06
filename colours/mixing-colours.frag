@@ -175,10 +175,36 @@ float easeInOutExpo(float t) {
 	}
 }
 
+float easeInBack(float t) {
+	float c1 = 1.70158;
+	float c3 = c1 + 1.0;
+
+	return c3 * pow(t, 3.0) - c1 * pow(t, 2.0);
+}
+
+float easeOutBack(float t) {
+	float c1 = 1.70158;
+	float c3 = c1 + 1.0;
+
+	return 1.0 + c3 * pow(t - 1.0, 3.0) + c1 * pow(t - 1.0, 2.0);
+}
+
+float easeInOutBack(float t) {
+	float c1 = 1.70158;
+	float c2 = c1 * 1.525;
+
+	if (t < 0.5) {
+		return (pow(2.0 * t, 2.0) * ((c2 + 1.0) * 2.0 * t - c2)) * 0.5;
+	}
+	else {
+		return (pow(2.0 * t - 2.0, 2.0) * ((c2 + 1.0) * (t * 2.0 - 2.0) + c2) + 2.0) * 0.5;
+	}
+}
+
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInOutExpo(u_time) * 0.5;
+	float pct = easeOutBack(u_time) * 0.5;
 
 	color = mix(colorA, colorB, pct);
 
