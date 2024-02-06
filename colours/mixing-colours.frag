@@ -58,16 +58,16 @@ float easeInOutQuint(float t) {
 	}
 }
 
-float eastInCirc(float t) {
+float easeInCirc(float t) {
 	return 1.0 - sqrt(1.0 - pow(t, 2.0));
 }
 
-float eastOutCirc(float t) {
+float easeOutCirc(float t) {
 	return sqrt(1.0 - pow(t - 1.0, 2.0));
 }
 
-float eastInOutCirc(float t) {
-	if (x < 0.5) {
+float easeInOutCirc(float t) {
+	if (t < 0.5) {
 		return (1.0 - sqrt(1.0 - pow(2.0 * t, 2.0))) * 0.5;
 	}
 	else {
@@ -78,7 +78,7 @@ float eastInOutCirc(float t) {
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInOutCirc(u_time);
+	float pct = easeInOutCirc(easeInSine(u_time));
 
 	color = mix(colorA, colorB, pct);
 
