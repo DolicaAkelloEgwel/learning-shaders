@@ -10,33 +10,41 @@ uniform float u_time;
 vec3 colorA = vec3(0.149, 0.141, 0.912);
 vec3 colorB = vec3(1.000, 0.833, 0.244);
 
-float easeInSine() {
-	return 1.0 - cos(u_time * PI * 0.5);
+float easeInSine(float t) {
+	return 1.0 - cos(t * PI * 0.5);
 }
 
-float easeOutSine() {
-	return sin(u_time * PI * 0.5);
+float easeOutSine(float t) {
+	return sin(t * PI * 0.5);
 }
 
-float easeInOutSine() {
-	return -(cos(PI * u_time) - 1.0) * 0.5;
+float easeInOutSine(float t) {
+	return -(cos(PI * t) - 1.0) * 0.5;
 }
 
-float easeInCubic() {
+float easeInCubic(float t) {
 	// This one just stick at yellow
-	return pow(u_time, 3.0);
+	return pow(t, 3.0);
 }
 
-float easeOutCubic() {
+float easeOutCubic(float t) {
 	// This one just stick at yellow
-	return 1.0 - pow(1.0 - u_time, 3.0);
+	return 1.0 - pow(1.0 - t, 3.0);
 }
 
+float easeInOutCubic(float t) {
+	if (t < 0.5) {
+		return 4.0 * pow(t, 3.0);
+	}
+	else {
+		return 1.0 - pow(-2.0 * t + 2.0, 3.0) * 0.5;
+	}
+}
 
 void main() {
 	vec3 color = vec3(0.0);
 
-	float pct = easeInSine();
+	float pct = easeInOutCubic(u_time);
 
 	color = mix(colorA, colorB, pct);
 
