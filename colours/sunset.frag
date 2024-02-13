@@ -24,8 +24,8 @@ void main() {
     vec3 pct = vec3(st.y);
 
     // pct.r = abs(sin(st.y - u_time));
-    pct.r = smoothstep(0.0,abs(sin(u_time * 0.25)), st.y);
-    pct.g = smoothstep(0.0,abs(sin(u_time * 0.25)) * 0.25, st.y);
+    pct.r = smoothstep(0.0,(sin(u_time * 0.25)) + 1.0, st.y);
+    pct.g = smoothstep(0.0,(sin(u_time * 0.25) + 1.0) * 0.25, st.y);
     // pct.b = abs(sin(st.y + u_time));;
 
     color = mix(colorB, colorA, pct);
