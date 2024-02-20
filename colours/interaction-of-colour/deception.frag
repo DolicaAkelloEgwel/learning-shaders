@@ -25,7 +25,7 @@ float rect(in vec2 st, in vec2 size){
 
 float swap(in vec2 st) {
     // Causes the division to move between being horizontal and being vertical
-    if (mod(floor(u_time), 10) < 5) return st.x;
+    if (mod(floor(u_time * 0.25), 10) < 5) return st.x;
     return st.y;
 }
 
@@ -39,7 +39,7 @@ void main() {
 
     vec3 color = mix(influencing_color_A,
                      influencing_color_B,
-                     step(.5, swap(st)));
+                     step(fract(u_time * 0.25), swap(st)));
 
     color = mix(color,
                influenced_color,
