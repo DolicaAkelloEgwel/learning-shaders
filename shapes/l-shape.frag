@@ -29,17 +29,23 @@ vec2 smoothstep_border(vec2 st, float edge0, float edge1) {
     return smoothstep(edge0, edge1, st);
 }
 
+vec2 floor_border(vec2 st, float edge0, float edge1) {
+    return floor(smoothstep(edge0, edge1, st));
+}
+
 void main(){
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     vec3 color = vec3(0.0);
 
     // bottom-left
     // vec2 bl = step(movement(),st);
-    vec2 bl = smoothstep_border(st, 0.0, 0.1);
+    // vec2 bl = smoothstep_border(st, 0.0, 0.1);
+    vec2 bl = floor_border(st, 0.0, 0.1);
     float pct = bl.x * bl.y;
 
     // top-right
-    vec2 tr = vec2(1.0) - smoothstep_border(st, 0.9, 1.0);
+    // vec2 tr = vec2(1.0) - smoothstep_border(st, 0.9, 1.0);
+    vec2 tr = vec2(1.0) - floor_border(st, 0.8, 0.9);
     pct *= tr.x * tr.y;
 
     color = vec3(pct);
