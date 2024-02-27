@@ -14,6 +14,11 @@ float line(float x0, float x1, float y0, float y1, vec2 st) {
 void main(){
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     vec3 color = vec3(1.0);
+    vec3 shapes = vec3(1.0);
+
+    float red = line(0.0, 0.3, 0.6, 1.0, st);
+    float yellow = line(0.9, 1.0, 0.6, 1.0, st);
+    float blue = line(0.7, 1.0, 0.0, 0.1, st);
 
     float vline0 = line(0.3, 0.35, 0.0, 1.0, st);
     float vline1 = line(0.7, 0.75, 0.0, 1.0, st);
@@ -26,7 +31,7 @@ void main(){
     float shline = line(0.3, 1.0, 0.1, 0.15, st);
 
     float pct = vline0 * vline1 * vline3 * hline0 * hline1 * svline * shline;
-    color = vec3(pct);
+    color = vec3(pct) * (vec3(red) + vec3(1.0, 0.0, 0.0)) * (vec3(yellow) + vec3(1.0, 0.984, 0.0)) * (vec3(blue) + vec3(0.0, 0.0, 1.0));
 
     gl_FragColor = vec4(color, 1.0);
 }
