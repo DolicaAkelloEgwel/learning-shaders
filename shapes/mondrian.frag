@@ -14,7 +14,6 @@ float line(float x0, float x1, float y0, float y1, vec2 st) {
 void main(){
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     vec3 color = vec3(1.0);
-    vec3 shapes = vec3(1.0);
 
     float red = line(0.0, 0.3, 0.6, 1.0, st);
     float yellow = line(0.9, 1.0, 0.6, 1.0, st);
