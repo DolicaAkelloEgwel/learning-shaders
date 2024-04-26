@@ -29,19 +29,39 @@ float solid_circle(vec2 st) {
 }
 
 float pulsing_circle(float lower, float upper, vec2 st) {
-	float diff = (upper - lower) * 0.5;
-	return step((diff * 0.5 * sin(u_time) + diff), pixel_distance(st));
+	float diff = (upper - lower);
+	return step((diff * 0.5 * sin(u_time) + lower), pixel_distance(st));
 }
 
 float gradient_circle(float lower_bound, float upper_bound, vec2 st) {
 	return smoothstep(lower_bound, upper_bound, pixel_distance(st));
 }
 
+float add_distance_field(vec2 st) {
+	return distance(st,vec2(0.4)) + distance(st,vec2(0.6));
+}
+
+float mult_distance_field(vec2 st) {
+	return distance(st,vec2(0.4)) * distance(st,vec2(0.6));
+}
+
+float min_distance_field(vec2 st) {
+	return min(distance(st,vec2(0.4)),distance(st,vec2(0.6)));
+}
+
+float max_distance_field(vec2 st) {
+	return max(distance(st,vec2(0.4)),distance(st,vec2(0.6)));
+}
+
+float pow_distance_field(vec2 st) {
+	return pow(distance(st,vec2(0.4)),distance(st,vec2(0.6)));
+}
+
 void main() {
 	vec2 st = gl_FragCoord.xy / u_resolution;
 	float pct = 0.0;
 
-	pct = pulsing_circle(0.1, 0.99, st);
+	pct = pow_distance_field(st);
 
 	vec3 color = vec3(pct);
 	gl_FragColor = vec4(color, 1.0);
