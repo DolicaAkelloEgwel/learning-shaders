@@ -7,7 +7,7 @@ uniform vec2 u_mouse;
 uniform float u_time;
 
 float color_block(float x0, float x1, float y0, float y1, vec2 st) {
-	return ! ((st.x > x0) && (st.x < x1) && (st.y > y0) && (st.y < y1));
+	return float(! ((st.x > x0) && (st.x < x1) && (st.y > y0) && (st.y < y1)));
 }
 
 void main(){
