@@ -41,7 +41,7 @@ void main(){
     color = mix(vec3(1.0, 0.0, 0.0), color, red_region);
     color = mix(vec3(0.0, 0.0, 1.0), color, blue_region);
     color = mix(vec3(1.0, 1.0, 0.0), color, yellow_region);
-    color = mix(vec3(0.0, 0.0, 0.0), color, lines);
+    color = mix(BLACK, color, lines);
 
     gl_FragColor = vec4(color, 1.0);
 }
