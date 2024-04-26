@@ -24,7 +24,7 @@ void main() {
 	vec2 st = gl_FragCoord.xy / u_resolution;
 	float pct = 0.0;
 
-	pct = square_root(st);
+	pct = square_root(st) * 2.0;
 
 	vec3 color = vec3(pct);
 	gl_FragColor = vec4(color, 1.0);
